@@ -40,9 +40,9 @@ activities.addEventListener("change", (e) => {
 function readTime(str) {
     if (!str) return
     let [start, end] = str.split("-")
-    startNumber = parseInt(start)
+    let startNumber = parseInt(start)
     startNumber = startNumber + (start.includes("pm") && startNumber < 12 ? 12 : 0)
-    endNumber = parseInt(end)
+    let endNumber = parseInt(end)
     endNumber = endNumber + (end.includes("pm") && endNumber < 12 ? 12 : 0)
     return {startNumber, endNumber}
 }
@@ -76,10 +76,19 @@ function disableConflicts(currentActivity, arrOfActivities) {
     })
 }
 
+const paymentBox = document.querySelector(".payment-method-box")
+const creditCard = document.querySelector("#credit-card")
+const paypal = document.querySelector("#paypal")
+const bitcoin = document.querySelector("#bitcoin")
 
+paypal.style.display = 'none'
+bitcoin.style.display = 'none'
 
-
-
+paymentBox.addEventListener("change", (e) => {
+    [creditCard, paypal, bitcoin].forEach((method) => {
+        method.getAttribute("id") === e.target.value ? method.style.display = "" : method.style.display = "none"
+    })
+})
 
 
 
